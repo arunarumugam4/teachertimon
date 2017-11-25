@@ -11,9 +11,22 @@ const saltRounds = 10;
 const userSchema = Schema({
     local: {
 
-        email: { type: String },
+        email: { type: String,lowercase:true },
         password: { type: String },
         userName: { type: String }
+    },
+    facebook: {
+        id:{type:String},
+        token: {type:String},
+        name: {type:String},
+        email: {type:String}
+    },
+    google: {
+
+        id:{type:String},
+        token: {type:String},
+        name: {type:String},
+        email: {type:String}
     }
 });
 
@@ -31,7 +44,7 @@ userSchema.methods.hashThePassword = function(password) {
 
 userSchema.methods.verifyThePassword = function(password) {
 
-   return bcrypt.compare(password, hash)
+   return bcrypt.compare(password, this.local.password)
         .then((res) => {
 
             return res;

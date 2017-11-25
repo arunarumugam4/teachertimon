@@ -6,6 +6,7 @@ const _Router = express.Router();
 const userModel = mongoose.model('userModel');
 const userSecretModel = mongoose.model('userSecretModel');
 const isAllFieldsAvailable = require('../../customMiddlewares/isAllFieldsAvailable');
+const jwt = require('jsonwebtoken');
 const async = require('async');
 
 
@@ -53,6 +54,16 @@ module.exports = (app, responseFormat) => {
                         let response = responseFormat(true, "sorry, some error occured try again later", 400, null);
                         res.json(response);
                     }
+
+                    let userData = {}
+                    userData._id = newUser._id;
+                    userData.userName = newUser.local.userName;
+                    userData.email = user.local.email;
+
+                     // user and password are ok, generate token
+                    const token = jwt.sign(userData, app.get('tokenSecret'), { expiresIn: 60 * 60 * 24 }); // ** validity 24 hours only **
+                    // assign the token in cookies
+                    res.cookie("token", token);
 
                     let response = responseFormat(false, "successfully signedup!!!", 200, newUser);
                     return res.json(response);

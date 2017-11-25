@@ -12,15 +12,19 @@
     "async": "^2.6.0",
     "bcrypt": "^1.0.3",
     "body-parser": "*",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "*",
+    "email-validator": "^1.1.1",
     "express": "*",
     "express-session": "*",
+    "flash": "^1.1.0",
+    "jsonwebtoken": "^8.1.0",
     "mongoose": "*",
     "morgan": "^1.9.0",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth": "^1.0.0",
-    "passport-local": "^1.0.0",
+    "passport-jwt": "^3.0.1",
     "socket.io": "*"
   }
 }

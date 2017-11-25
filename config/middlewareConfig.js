@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const passport = require('passport');
 const logger = require('morgan');
+const flash = require('connect-flash');
+
 
 
 
@@ -19,7 +21,8 @@ module.exports = (app) => {
 	app.use(bodyParser.urlencoded({extended:true}));
 	app.use(bodyParser.json());
 	app.use(cookieParser());
-	app.use(expressSession({ secret: sessionSecret, resave: true, saveUninitialized: true }));
+	//app.use(expressSession({ secret: sessionSecret, resave: true, saveUninitialized: false }));
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use(flash());
 }

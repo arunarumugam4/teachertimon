@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const http = require('http');
 const path = require('path');
+const passport = require('passport');
 const fs = require('fs');
 const responseFormat = require('./customLib/responseFormat');
 
@@ -26,6 +27,11 @@ require('./config/databaseConfig.js');
 require('./config/middlewareConfig.js')(app);
 
 
+// set jwt token secret
+let jwtSecret = require('./secrets/tokenSecret')
+app.set('tokenSecret', jwtSecret);
+
+
 
 
 // initialize all models
@@ -37,7 +43,11 @@ fs.readdirSync(path.join(__dirname, './app/models')).forEach((fileName) => {
         require(`./app/models/${fileName}`);
     }
 
-})
+});
+
+
+// initialize passport configuration
+require('./config/passportConfig.js')(passport);
 
 
 
@@ -50,7 +60,11 @@ fs.readdirSync(path.join(__dirname, './app/controllers')).forEach((fileName) => 
     if (fileName.indexOf('.js') !== -1) {
         require(`./app/controllers/${fileName}`)(app, responseFormat);
     }
-})
+});
+
+
+
+
 
 
 // initialize fall back routes

@@ -1,0 +1,44 @@
+body,html{
+    margin:0;
+	overflow-x:hidden;
+	min-height:100vh;
+}
+
+#navbar {
+	background-color:white !important;
+
+
+}
+
+#logo {
+    padding-left: 2%;
+    font-family: 'Righteous', cursive;
+    font-weight: 5em;
+    color: #49274A;
+    font-size:1.5em;
+    padding:10px;
+    border:2px solid black;
+    box-shadow:0px 0px 1px  black;
+    padding-right:0;
+    margin-left:8px;
+    display:none;
+}
+
+#logo span{
+	padding:10px;
+	margin-right:0;
+	color:white;
+
+}
+
+.introtext {
+	
+	word-wrap:break-word;
+	text-align:center;
+	padding:10px;
+    color:;
+    font-family: 'Righteous', cursive;
+    font-weight:5em;
+    text-shadow:0px 0px 1px black;
+}
+
