@@ -1,0 +1,333 @@
+
+<!-- ADD QUESTIONS TO THE TEST -->
+<div class="container" style="margin-top:20px;">
+    <div class="row">
+    <!-- STATUS TOGGLE BUTTON -->
+            <div  class="col s12 ">
+                <div class="switch right">
+                    <label>
+                        close
+                        <input id="check"  type="checkbox" checked>
+                        <span class="lever"></span> open
+                    </label>
+                </div>
+            </div>
+        <div class="col s12" style="text-align:center">
+            <h6 class="white-text" style="text-align:center;font-family: 'Righteous', cursive;text-shadow:0px 0px 1px black;border:2px solid black;display:inline-block;padding:6px;background-color:#0f1626;font-size:1.2em">add questions  </h6>
+
+           <a href="#!alltest"><button  style="margin:7px;" class="btn left">BACK</button></a>
+        </div>
+        <div ng-show="!titEdit" style="text-align:center;padding:4px;" class="col s12 card ">
+            <h6 style="font-weight:600;text-align:right;"> Start Date : {{createTestCtrl.startDates | date}} </h6>
+            <h6 style="font-weight:600;text-align:right;"> Start Time : {{createTestCtrl.startTimes}} </h6>
+            <h6 style="font-family: 'Roboto', sans-serif;display:inline-block;font-weight:600;font-size:1.2em">{{createTestCtrl.testTitle}} </h6>
+            <button style="margin:6px" ng-click="titEdit = !titEdit;createTestCtrl.titEdit()" class="btn btn-small right">EDIT</button>
+        </div>
+        <div ng-show="createTestCtrl.initialLoader === true" style="top:14px;left:45%;margin:8px;" class="preloader-wrapper small active center">
+            <div class="spinner-layer ">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="titEdit" class="col s12 card">
+            <textarea ng-model="createTestCtrl.testTitle" class="materialize-textarea"></textarea>
+            <button ng-click="createTestCtrl.editTitleHandler();titEdit = !titEdit" style="margin:6px" class="btn btn-small right">UPDATE</button>
+            <button style="margin:6px" ng-click="titEdit = !titEdit;createTestCtrl.canceltitEdit()" class="btn btn-small right red">CANCEL</button>
+        </div>
+        
+        <!-- STARTING DATE AND TIME -->
+        <div class="col s12 ">
+            <button ng-show="createTestCtrl.dateBar===false" ng-click="createTestCtrl.dateBar = !createTestCtrl.dateBar" class='btn'>pick Date &amp; Time</button>
+        </div>
+         <div ng-show="createTestCtrl.dateBar===true" style="border:2px solid black" class="col s12 card-panel">
+            <div class="row">
+            <form ng-submit="createTestCtrl.updateDateAndTime()">
+                <div class="col s6 input-field "><input ng-model="createTestCtrl.startDate" placeholder="choose date" class=" btn datepicker blue white-text" required> </div>
+                <div class="col s6 input-field "><input ng-model="createTestCtrl.startTime" placeholder="choose time"  class="btn timepicker blue white-text" required> </div>
+                <div class="col s6 input-field">
+                    <button style="margin:7px" class="btn">update</button>
+                    <button ng-click="createTestCtrl.dateBar = !createTestCtrl.dateBar;createTestCtrl.datemissing === false"  style="margin:7px" class="btn red">cancel</button>
+                    <h6 style="border:2px solid red;font-weight:600;display:inline-block;margin:8px;padding:4px" ng-show="createTestCtrl.datemissing === true">choose the date</h6>
+                </div>
+                
+           </form>
+            </div>
+
+                  
+                
+             
+         </div>
+
+
+
+
+
+
+
+        <!-- ADDED QUESTIONS -->
+        <div class="col s12">
+            <div class="card-panel row" ng-repeat=" question in createTestCtrl.addedQuestions track by $index">
+                <h6 style="font-weight:600;display:;text-align:right;">mark : {{question.mark}}</h6>
+                <h6 style="font-weight:600">{{$index + 1}} . {{question.question}}</h6>
+                <div ng-repeat="option in question.options track by $index">
+                    <div class="col s6">
+                        <input value="1" class="with-gap " name="group1" type="radio" id="test1" disabled="disabled" />
+                        <label for="test1">{{option}}</label>
+                    </div>
+                </div>
+                <button ng-click="createTestCtrl.editModeHandler($index);editmodeOn = !editmodeOn" style="margin:4px" class="btn waves-effect small btn-small">EDIT</button>
+                <button ng-click="createTestCtrl.deleteQuestionHandler($index)" style="margin:4px" class="btn waves-effect small red btn-small">DELETE</button>
+                <h6 style="font-weight:600;display:;text-align:right;">answer: option-{{question.answer}}</h6>
+                <!-- EDIT QUESTION -->
+                <div ng-show="editmodeOn" class="col s12">
+                    <!--  FORM -->
+                    <form class="col s12" name="editform">
+                        <div id="logineffect" style="padding:5%;margin-bottom:10px;background-color:" class="row darken-5 card yellow lig">
+                            <!-- TITLE OF THE TEST -->
+                            <!-- QUESTION -->
+                            <h6 style="font-weight:600;text-align:center">enter your question</h6>
+                            <div class="input-field ">
+                                <i class="material-icons prefix">mode_edit</i>
+                                <textarea id="icon_prefix2" ng-model="question.question" class="materialize-textarea" required></textarea>
+                                <label for="icon_prefix2"></label>
+                            </div>
+                            <!-- OPTIONS -->
+                            <h6 style="font-weight:600;text-align:center">four options for this question</h6>
+                            <div style="border:2px solid black" class="row card gray">
+                                <div class="col s12 m6">
+                                    <div class="input-field ">
+                                        <i class="material-icons prefix tiny">mode_edit</i>
+                                        <textarea id="icon_prefix2" ng-model="question.options[0]" class="materialize-textarea" required></textarea>
+                                        <label for="icon_prefix2"></label>
+                                    </div>
+                                </div>
+                                <div class="col s12 m6">
+                                    <div class="input-field ">
+                                        <i class="material-icons prefix">mode_edit</i>
+                                        <textarea id="icon_prefix2" ng-model="question.options[1]" class="materialize-textarea" required></textarea>
+                                        <label for="icon_prefix2"></label>
+                                    </div>
+                                </div>
+                                <div class="col s12 m6">
+                                    <div class="input-field ">
+                                        <i class="material-icons prefix">mode_edit</i>
+                                        <textarea id="icon_prefix2" ng-model="question.options[2]" class="materialize-textarea" required></textarea>
+                                        <label for="icon_prefix2"></label>
+                                    </div>
+                                </div>
+                                <div class="col s12 m6">
+                                    <div class="input-field ">
+                                        <i class="material-icons prefix ">mode_edit</i>
+                                        <textarea id="icon_prefix2" ng-model="question.options[3]" class="materialize-textarea" required></textarea>
+                                        <label for="icon_prefix2"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- CORRECT ANSWER -->
+                            <h6 ng-show="createTestCtrl.error===true" style="font-weight:600;border:2px solid red;padding:3px;display:inline-block;text-align:center">you have to select this field</h6>
+                            <div style="text-align:center;" class="row">
+                                <h6 style="font-weight:600">select the correct answer for this question</h6>
+                                <p class="col s6">
+                                    <input value="1" class="with-gap " ng-model="question.answer" name="group1" type="radio" id="{{question._id+'a'}}" />
+                                    <label for="{{question._id+'a'}}">option 1</label>
+                                </p>
+                                <p class="col s6">
+                                    <input value="2" class="with-gap " ng-model="question.answer" name="group1" type="radio" id="{{question._id+'b'}}" />
+                                    <label for="{{question._id+'b'}}">option 2</label>
+                                </p>
+                                <p class="col s6">
+                                    <input value="3" class="with-gap " ng-model="question.answer" name="group1" type="radio" id="{{question._id+'c'}}" />
+                                    <label for="{{question._id+'c'}}">option 3</label>
+                                </p>
+                                <p class="col s6">
+                                    <input value="4" class="with-gap " ng-model="question.answer" name="group1" type="radio" id="{{question._id+'d'}}" />
+                                    <label for="{{question._id+'d'}}">option 4</label>
+                                </p>
+                            </div>
+                            <!-- MARK -->
+                            <h6 style="font-weight:600;text-align:center">how much mark this question holds</h6>
+                            <div class="input-field col s6">
+                                <input class="materialize-number" ng-model="question.mark" id="mark" type="number" class="validate" required autofocus>
+                                <label for="mark"></label>
+                            </div>
+                            <!-- ADD BTN -->
+                            <div class="input-field col s12">
+                                <button ng-click="createTestCtrl.questionEditHandler($index);editmodeOn = !editmodeOn" style="background-color:#0f1626;margin:7px;" class="btn waves-effect waves-light " type="submit" name="action">UPDATE
+                                    <i class="material-icons right">send</i>
+                                </button> <i class="material-icons"></i>
+                                <button ng-click="createTestCtrl.editCancelHandler($index);editmodeOn = !editmodeOn" style="margin:7px;" class="btn waves-effect waves-light red " type="submit" name="action">CANCEL
+                                </button> <i class="material-icons"></i>
+                                <!-- PRE LOADER -->
+                                <div ng-show="createTestCtrl.questionPreloader===true" style="top:14px;" class="preloader-wrapper small active">
+                                    <div class="spinner-layer ">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="gap-patch">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  ERROR MESSAGE TAG -->
+                                <div ng-show="createTestCtrl.errorMessage.length>0" class="card blue darken-5">
+                                    <h5 style="text-align:center;padding:8px;word-wrap:break-word;color:red;font-family: 'Righteous', cursive;font-size:1.3em">{{createTestCtrl.errorMessage}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div ng-show="createTestCtrl.addNew === false" class="col s12">
+            <div class="col m4 s12"></div>
+            <div ng-click="createTestCtrl.addNew = true" class="col s12 m6 ">
+                <button style="background-color:#0f1626;color:white;margin:8px;" class="btn waves-effect waves-light "><i class="material-icons left">add</i>NEW</button>
+            </div>
+        </div>
+        <!-- ADD NEW QUESTION -->
+        <div ng-show="createTestCtrl.addNew === true" class="col s12">
+            <!--  FORM -->
+            <form name="newform" ng-submit='createTestCtrl.addQuestionHandler()' class="col s12">
+                <div id="logineffect" style="padding:5%;margin-bottom:10px;" class="row darken-5 card">
+                    <!-- TITLE OF THE TEST -->
+                    <!-- QUESTION -->
+                    <h6 style="font-weight:600;text-align:center">enter your question</h6>
+                    <div class="input-field ">
+                        <i class="material-icons prefix">mode_edit</i>
+                        <textarea id="icon_prefix2" ng-model="createTestCtrl.questionData.question" class="materialize-textarea" required></textarea>
+                        <label for="icon_prefix2">question</label>
+                    </div>
+                    <!-- OPTIONS -->
+                    <h6 style="font-weight:600;text-align:center">four options for this question</h6>
+                    <div style="border:2px solid black" class="row card gray">
+                        <div class="col s12 m6">
+                            <div class="input-field ">
+                                <i class="material-icons prefix tiny">mode_edit</i>
+                                <textarea id="icon_prefix2" ng-model="createTestCtrl.questionData.options[0]" class="materialize-textarea" required></textarea>
+                                <label for="icon_prefix2">option 1</label>
+                            </div>
+                        </div>
+                        <div class="col s12 m6">
+                            <div class="input-field ">
+                                <i class="material-icons prefix">mode_edit</i>
+                                <textarea id="icon_prefix2" ng-model="createTestCtrl.questionData.options[1]" class="materialize-textarea" required></textarea>
+                                <label for="icon_prefix2">option 2</label>
+                            </div>
+                        </div>
+                        <div class="col s12 m6">
+                            <div class="input-field ">
+                                <i class="material-icons prefix">mode_edit</i>
+                                <textarea id="icon_prefix2" ng-model="createTestCtrl.questionData.options[2]" class="materialize-textarea" required></textarea>
+                                <label for="icon_prefix2">option 3</label>
+                            </div>
+                        </div>
+                        <div class="col s12 m6">
+                            <div class="input-field ">
+                                <i class="material-icons prefix ">mode_edit</i>
+                                <textarea id="icon_prefix2" ng-model="createTestCtrl.questionData.options[3]" class="materialize-textarea" required></textarea>
+                                <label for="icon_prefix2">option 4</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- CORRECT ANSWER -->
+                    <h6 ng-show="createTestCtrl.error===true" style="font-weight:600;border:2px solid red;padding:3px;display:inline-block;text-align:center">you have to select this field</h6>
+                    <div style="text-align:center;" class="row">
+                        <h6 style="font-weight:600">select the correct answer for this question</h6>
+                        <p class="col s6">
+                            <input value="1" ng-model="createTestCtrl.questionData.answer" class="with-gap " name="group1" type="radio" id="test2" />
+                            <label for="test2">option 1</label>
+                        </p>
+                        <p class="col s6">
+                            <input value="2" ng-model="createTestCtrl.questionData.answer" class="with-gap " name="group1" type="radio" id="test3" />
+                            <label for="test3">option 2</label>
+                        </p>
+                        <p class="col s6">
+                            <input value="3" ng-model="createTestCtrl.questionData.answer" class="with-gap " name="group1" type="radio" id="test4" />
+                            <label for="test4">option 3</label>
+                        </p>
+                        <p class="col s6">
+                            <input value="4" ng-model="createTestCtrl.questionData.answer" class="with-gap " name="group1" type="radio" id="test5" />
+                            <label for="test5">option 4</label>
+                        </p>
+                    </div>
+                    <!-- MARK -->
+                    <h6 style="font-weight:600;text-align:center">how much mark this question holds</h6>
+                    <div class="input-field col s6">
+                        <input class="materialize-number" ng-model="createTestCtrl.questionData.mark" id="mark" type="number" class="validate" required>
+                        <label for="mark">mark</label>
+                    </div>
+                    <!-- ADD BTN -->
+                    <div class="input-field col s12">
+                        <button style="background-color:#0f1626;margin:7px" class="btn waves-effect waves-light " type="submit">ADD
+                            <i class="material-icons right">send</i>
+                        </button>
+                        <!-- PRE LOADER -->
+                        <div ng-show="createTestCtrl.preloader===true" style="top:14px;" class="preloader-wrapper small active">
+                            <div class="spinner-layer ">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button style="margin:7px;" ng-click="createTestCtrl.addNew = false" class="btn waves-effect waves-light red ">CANCEL
+                        </button>
+                        <!--  ERROR MESSAGE TAG -->
+                        <div ng-show="createTestCtrl.errorMessage.length>0" class="card blue darken-5">
+                            <h5 style="text-align:center;padding:8px;word-wrap:break-word;color:red;font-family: 'Righteous', cursive;font-size:1.3em">{{createTestCtrl.errorMessage}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script>
+
+    // INITIALZIE DATE AND TIME
+
+    $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year,
+    today: 'Today',
+    clear: 'Clear',
+    close: 'Ok',
+    closeOnSelect: false // Close upon selecting a date,
+  });
+
+    $('.timepicker').pickatime({
+    default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+    fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+    twelvehour: false, // Use AM/PM or 24-hour format
+    donetext: 'OK', // text for done-button
+    cleartext: 'Clear', // text for clear-button
+    canceltext: 'Cancel', // Text for cancel-button
+    autoclose: false, // automatic close timepicker
+    ampmclickable: true, // make AM PM clickable
+    aftershow: function(){} //Function for after opening timepicker
+  });
+
+    $("#handburger").show();
+
+    </script>
+</div>

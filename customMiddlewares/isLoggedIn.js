@@ -8,56 +8,19 @@ const jwt = require('jsonwebtoken');
 module.exports = (req, res, next) => {
 
    
-     // CHECK FOR THE TOKEN IN FBTOKEN
-     const fbtoken = req.cookies.fbtoken || req.body.fbtoken || req.query.fbtoken;
 
-     // CHECK FOR THE TOKEN IN GOOGLETOKEN
-     const googletoken = req.cookies.googletoken || req.body.googletoken || req.query.googletoken;
 
      // CHECK FOR THE TOKEN IN LOCALTOKEN
      const token = req.cookies.token || req.body.token || req.query.token;
 
  
-        if (fbtoken) {
+        if (token) {
 
          // VERIFY THE TOKEN
-         jwt.verify(fbtoken, secret, (err, decoded) => {
-
-             if (err) {
-                 let response = responseFormat(true, 'Authentication Failed, invalid fbtoken', 401, null);
-                 return res.json(response);
-             } else {
-                 // SAVE THE DECODED VALUES
-                 req.decoded = decoded;
-          
-                 return next();
-             }
-
-         })
-     }else if (token){
-
-
-     	  // VERIFY THE TOKEN
          jwt.verify(token, secret, (err, decoded) => {
 
              if (err) {
-                 let response = responseFormat(true, 'Authentication Failed, invalid fbtoken', 401, null);
-                 return res.json(response);
-             } else {
-                 // SAVE THE DECODED VALUES
-                 req.decoded = decoded;
-          
-                 return next();
-             }
-
-         })
-
-     }else if (googletoken){
-     	  // VERIFY THE TOKEN
-         jwt.verify(googletoken, secret, (err, decoded) => {
-
-             if (err) {
-                 let response = responseFormat(true, 'Authentication Failed, invalid fbtoken', 401, null);
+                 let response = responseFormat(true, 'Authentication Failed, invalid token', 401, null);
                  return res.json(response);
              } else {
                  // SAVE THE DECODED VALUES

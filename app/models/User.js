@@ -9,25 +9,16 @@ const saltRounds = 10;
 
 // define user schema
 const userSchema = Schema({
-    local: {
+    
 
         email: { type: String,lowercase:true },
         password: { type: String },
-        userName: { type: String }
-    },
-    facebook: {
-        id:{type:String},
+        userName: { type: String },
         token: {type:String},
-        name: {type:String},
-        email: {type:String}
-    },
-    google: {
+        id:{type:String},
+        attendedtests :[{type:Schema.ObjectId, ref:'attendedTestModel'}],
+        createdTests : [{type:Schema.ObjectId, ref:'testModel'}]
 
-        id:{type:String},
-        token: {type:String},
-        name: {type:String},
-        email: {type:String}
-    }
 });
 
 
@@ -44,7 +35,7 @@ userSchema.methods.hashThePassword = function(password) {
 
 userSchema.methods.verifyThePassword = function(password) {
 
-   return bcrypt.compare(password, this.local.password)
+   return bcrypt.compare(password, this.password)
         .then((res) => {
 
             return res;
@@ -56,7 +47,7 @@ userSchema.methods.verifyThePassword = function(password) {
 // define static methods
 userSchema.statics.duplicateEmailChecker = function(email) {
 
-   return this.findOne({"local.email": email }).exec((err, user) => {
+   return this.findOne({"email": email }).exec((err, user) => {
         if (err) {
             console.log(err);
             return 'error';

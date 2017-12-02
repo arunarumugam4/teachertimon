@@ -33,9 +33,9 @@ module.exports = (app, responseFormat) => {
             if (!isEmailAlreadyExist) {
                 // create new user 
                 let newUser = new userModel();
-                newUser.local.email = req.body.email;
-                newUser.local.userName = req.body.userName;
-                newUser.local.password = await newUser.hashThePassword(req.body.password);
+                newUser.email = req.body.email;
+                newUser.userName = req.body.userName;
+                newUser.password = await newUser.hashThePassword(req.body.password);
 
                 // save non hashed password
                 let userSecrets = {
@@ -57,8 +57,8 @@ module.exports = (app, responseFormat) => {
 
                     let userData = {}
                     userData._id = newUser._id;
-                    userData.userName = newUser.local.userName;
-                    userData.email = user.local.email;
+                    userData.userName = newUser.userName;
+                    userData.email = newUser.email;
 
                      // user and password are ok, generate token
                     const token = jwt.sign(userData, app.get('tokenSecret'), { expiresIn: 60 * 60 * 24 }); // ** validity 24 hours only **

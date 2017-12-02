@@ -5,12 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>teacherTIMON</title>
+    <title>teachertimon</title>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cinzel|Righteous" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Vollkorn+SC" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <!-- MAIN STYLE SHEET -->
     <link rel="stylesheet" href="styles/mainstyle.css" type="text/css" />
 </head>
@@ -18,37 +19,40 @@
 <body ng-app="myApp">
     <!-- NAVBAR SECTION -->
     <nav>
-    <div id="navbar" class="nav-wrapper ">
-      
-
-                <!-- NAV LOGO -->
-                <a href="#!" id='logo' class="logo darken-5">teacher <span class="red darken-5">timon</span></a>
-
-      <a href="#" data-activates="mobile-demo" class="button-collapse  show-on-large"><i class="material-icons black-text">menu</i></a>
-      
-      <ul class="side-nav" id="mobile-demo">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">Javascript</a></li>
-        <li><a href="mobile.html">Mobile</a></li>
-      </ul>
-    </div>
-  </nav>
-          
-  
- <!--  MAIN VIEW SECTION -->
-  <div ng-view></div>
-
-
-
-
-
-
-
+        <div id="navbar" class="nav-wrapper ">
+            <!-- NAV LOGO -->
+            <a href="#!" id='logo' class="logo darken-5 ">teacher <span  class="darken-5 red">timon</span></a>
+            <a  href="#" data-activates="slide-out" class="button-collapse  show-on-large"><i id="handburger" style="color:#0f1626" class="large material-icons  ">menu</i></a>
+            <ul id="slide-out" class="side-nav">
+                 <li>
+                        <div class="user-view">
+                            <div class="background">
+                            </div>
+                            <a><img class="circle" src="assets/logo3.png"></a>
+                            <a><span style="" class="black-text name">TEACHER TIMON</span></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="divider"></div>
+                    </li>
+                    <li><a class=" btn waves-effect coolside recentquestions" href="#!publictest">ALL TESTS</a></li>
+                    <li><a class=" btn waves-effect coolside yourquestions" href="#!alltest">MY TESTS</a></li>
+                    <li><a class=" btn waves-effect coolside youranswers" href="#!newtest">CREATE TEST</a></li>
+                    
+                    <li>
+                        <div class="divider"></div>
+                    </li>
+                    <li><a href="#!" id="logoutSide" class=" btn waves-effect red ">LOGOUT</a></li>
+                    <li><a style="background-color:#49274A !important" id="close" class=" btn waves-effect red ">CLOSE</a></li>
+                
+               </ul>
+        </div>
+    </nav>
+    <!--  MAIN VIEW SECTION -->
+    <div ng-view></div>
     <!-- EXTERNAL SCRIPT FILES -->
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
@@ -56,10 +60,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-messages.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-cookies.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
     <!-- INTERNAL SCRIPT FILES -->
     <script src="angular/app.js"></script>
     <script src="js/main.js"></script>
     <script src="angular/controllers/homeController.js"></script>
+    <script src="angular/controllers/signupController.js"></script>
+    <script src="angular/controllers/loginController.js"></script>
+    <script src="angular/controllers/profileController.js"></script>
+    <script src="angular/controllers/createTestController.js"></script>
+    <script src="angular/controllers/allTestController.js"></script>
+    <script src="angular/controllers/newTestController.js"></script>
+    <script src="angular/controllers/publicTestController.js"></script>
+    <script src="angular/controllers/liveTestController.js"></script>
     <script src="angular/routes/mainRoute.js"></script>
 </body>
 

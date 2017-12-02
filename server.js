@@ -67,18 +67,14 @@ fs.readdirSync(path.join(__dirname, './app/controllers')).forEach((fileName) => 
 
 
 
-// initialize fall back routes
-app.get('*', (req, res) => {
+// initialize fall back route
 
-    let response = responseFormat(true, 'This is not a valid api, try a valid one', 400, null)
+app.use(function(req,res){
+    let response = responseFormat(true, 'This is not a valid api, try a valid one', 400, null);
+    res.status(400);
     return res.json(response);
 });
 
-app.post('*', (req, res) => {
-
-    let response = responseFormat(true, 'This is not a valid api, try a valid one', 400, null)
-    return res.json(response);
-});
 
 
 

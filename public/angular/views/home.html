@@ -1,16 +1,16 @@
-<div style="margin-top:20px;" class="container">
+<div id="home" style="margin-top:20px;" class="container">
 	<div class="row">
 		<div class="col s12 m6">
-			<img src="/assets/logo1.png" class="img-responsive" style="width:100%;" alt="">
+			<img  src="/assets/logo1.png" class="img-responsive introimg" style="width:100%;display:none;" alt="">
 		</div>
 		<div class="col s12 m6">
 			<div class="introtext ">
-				<div class="introtext blue darken-5 card" >
-					<p id="introtext" class="flow-text white-text darken-5"></p>
+				<div  class="introtext yellow card" >
+					<p id="introtext" class="flow-text white-text "></p>
                    
 			</div>
-			<a class="waves-effect waves-light btn red left">login</a>
-			<a class="waves-effect waves-light btn red right">signup</a>
+			<a href="#!login" style="background-color:#0f1626" class="waves-effect waves-light btn  left">login</a>
+			<a  style="background-color:#0f1626" href="#!signup" class="waves-effect waves-light btn  right">signup</a>
 
 		</div>
 	</div>
@@ -20,17 +20,25 @@
 
 <!-- HOME SCRIPTS -->	
 <script>
+ 
+ $('#home').ready(function(){
+
+   $('.introimg').fadeIn("slow");
+   $("#handburger").hide();
 
 
-
-  // array with texts to type in typewriter
-  var dataText = [ "Register with us", "create awesome test contents","conduct realtime online tests","Get realtime curated test results","live doubut clearing capability"];
+ 	 // array with texts to type in typewriter
+  var dataText = [ "Register with us", "create awesome test contents","conduct realtime online tests","Get realtime curated test results","live doubut clearing capabilities"];
   
   // type one text in the typwriter
   // keeps calling itself until the text is finished
   function typeWriter(text, i, fnCallback) {
     // chekc if text isn't finished yet
     if (i < (text.length)) {
+
+      if(!(document.getElementById("introtext"))){
+        return;
+      }
       // add next character to h1
      document.getElementById("introtext").innerHTML = text.substring(0, i+1) +'<span aria-hidden="true"></span>';
 
@@ -65,5 +73,9 @@
   StartTextAnimation(0);
 
 
+ })
+
+
+ 
 </script>
 </div>

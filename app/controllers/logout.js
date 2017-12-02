@@ -13,8 +13,7 @@ module.exports = (app, responseFormat) => {
 
         // destroy the cookie
         res.cookie("token", "");
-        res.cookie("fbtoken","");
-        res.cookie("googletoken","")
+    
         let response = responseFormat(false, "successfully logged out !!!", 200, null);
         res.json(response);
 

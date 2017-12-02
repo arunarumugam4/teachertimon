@@ -1,0 +1,67 @@
+<!-- SIGNUP VIEW -->
+<div style="margin-top:20px;" class="container">
+    <div class="row">
+        <div style="text-align:center" class="col s12">
+            <a href="api/auth/facebook" style="background-color:#4267B1" class="waves-effect waves-light btn  ">facebook</a>
+            <a href="api/auth/google" style="margin:10px;" class="waves-effect waves-light btn red ">google</a>
+            <div class="clear-fix"></div>
+        </div>
+        <div class="col s12 ">
+          <h5 style="text-align:center;font-family: 'Righteous', cursive;display:">------- or ------- </h5>
+            <!-- SIGNUP FORM -->
+            <form ng-submit='signupCtrl.signupHandler()' class="col s12">
+                <div id="logineffect" style="padding:5%;margin-bottom:10px;" class="row darken-5 card">
+                    <!-- EMAIL -->
+                    <div class="input-field col s12 ">
+                        <i style="" class="material-icons prefix black-text">email</i>
+                        <input id="icon_prefix" type="email" ng-model="signupCtrl.data.email" class="validate" required>
+                        <label for="icon_prefix">Email</label>
+                    </div>
+                    <!-- USER NAME -->
+                    <div class="input-field col s12 ">
+                        <i style="" class="material-icons prefix black-text">account_circle</i>
+                        <input id="icon_prefix" type="text" ng-model="signupCtrl.data.userName" class="validate" required>
+                        <label for="icon_prefix">User Name</label>
+                    </div>
+                    <!-- PASSWORD -->
+                    <div class="input-field col s12">
+                        <i style="" class="material-icons prefix black-text">lock</i>
+                        <input id="icon_telephone" type="password" ng-model="signupCtrl.data.password" class="validate" required>
+                        <label for="icon_telephone">password</label>
+                    </div>
+                    <!-- SIGNUP BTN -->
+                    <div class="input-field col s12">
+                        <button style="background-color:#0f1626" class="btn waves-effect waves-light " type="submit" name="action">SignUp
+                            <i class="material-icons right">send</i>
+                        </button> <i class="material-icons"></i>
+                        <!-- PRE LOADER -->
+                        <div ng-show="signupCtrl.preloader===true" style="top:14px;" class="preloader-wrapper small active">
+                            <div class="spinner-layer ">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  ERROR MESSAGE TAG -->
+                        <div ng-show="signupCtrl.errorMessage.length>0" class="card blue darken-5">
+                            <h5 style="text-align:center;padding:8px;word-wrap:break-word;color:red;font-family: 'Righteous', cursive;font-size:1.3em">{{signupCtrl.errorMessage}}</h5>
+                        </div>
+                    </div>
+                </div>
+                 <!-- LOGIN LINK -->
+                <h6 style="text-align:center;padding:8px;word-wrap:break-word;color:black;font-family: 'Righteous', cursive;font-size:1.3em">if you already signedup? <a href="#!login">login</a></h6>
+            </form>
+        </div>
+    </div>
+    <!-- SIGNUP SCRIPTS -->
+    <script>
+    $('select').material_select();
+    $("#handburger").hide();
+    </script>
+</div>

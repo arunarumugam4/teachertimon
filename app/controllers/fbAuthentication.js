@@ -18,20 +18,19 @@ module.exports = (app, responseFormat) => {
     }));
 
 	app.get('/auth/facebook/callback',
-      passport.authenticate('facebook', { failureRedirect: '/api/fail', session:false }),
+      passport.authenticate('facebook', { failureRedirect: '/#!/login', session:false }),
       function(req, res) {
         
-        let data = { fbId : req.user.facebook.id};
+        let data = { _id : req.user._id};
         // user and password are ok, generate token
         const token = jwt.sign(data, app.get('tokenSecret'), { expiresIn: 60 * 60 * 24 }); // ** validity 24 hours only **
         // assign the token in cookies
-        res.cookie("fbtoken", token);
-        res.cookie("googletoken", "");
-        res.cookie("token", "");
+        res.cookie("token", token);
+       
 
 
         // Successful authentication, redirect profile.
-        res.redirect('/api/profile');
+        res.redirect('/#!/publictest');
       });
 
   

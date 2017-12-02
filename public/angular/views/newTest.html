@@ -1,0 +1,50 @@
+<!-- CREATE TEST VIEW -->
+<div  style="margin-top:20px;" class="container">
+    <div class="row">
+        <div class="col s12" style="text-align:center">
+            <a href="#!alltest"><button  style="margin:7px;" class="btn left">BACK</button></a>
+            <h5 class="white-text" style="text-align:center;font-family: 'Righteous', cursive;text-shadow:0px 0px 1px black;border:2px solid black;display:inline-block;padding:6px;background-color:#0f1626">create new test</h5>
+        </div>
+        <div class="col s12">
+            <!--  FORM -->
+            <form ng-submit='newTestCtrl.createTestHandler()' class="col s12">
+                <div id="logineffect" style="padding:5%;margin-bottom:10px;" class="row darken-5 card">
+                    <!-- TITLE OF THE TEST -->
+                    <div class="input-field ">
+                        <i class="material-icons prefix">mode_edit</i>
+                        <textarea id="icon_prefix2" ng-model="newTestCtrl.data.testTitle" class="materialize-textarea" required></textarea>
+                        <label for="icon_prefix2">TEST TITLE</label>
+                    </div>
+                    <!-- CREATE BTN -->
+                    <div class="input-field col s12">
+                        <button style="background-color:#0f1626" class="btn waves-effect waves-light " type="submit" name="action">create
+                            <i class="material-icons right">send</i>
+                        </button> <i class="material-icons"></i>
+                        <!-- PRE LOADER -->
+                        <div ng-show="newTestCtrl.preloader===true" style="top:14px;" class="preloader-wrapper small active">
+                            <div class="spinner-layer ">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  ERROR MESSAGE TAG -->
+                        <div ng-show="newTestCtrl.errorMessage.length>0" class="card blue darken-5">
+                            <h5 style="text-align:center;padding:8px;word-wrap:break-word;color:red;font-family: 'Righteous', cursive;font-size:1.3em">{{createTestCtrl.errorMessage}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    $("#handburger").show();
+</script>
+</div>

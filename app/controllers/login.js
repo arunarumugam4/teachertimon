@@ -27,7 +27,7 @@ module.exports = (app, responseFormat) => {
        
 
             // find the user
-            userModel.findOne({ 'local.email': req.body.email }, (err, user) => {
+            userModel.findOne({ 'email': req.body.email }, (err, user) => {
 
                 if (err) {
                     console.log(err);
@@ -54,8 +54,7 @@ module.exports = (app, responseFormat) => {
 
                     let userData = {}
                     userData._id = user._id;
-                    userData.userName = user.local.userName;
-                    userData.email = user.local.email;
+                    
 
 
                     // user and password are ok, generate token

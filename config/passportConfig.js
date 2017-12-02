@@ -38,7 +38,7 @@ passport.use(new googleStrategy({
         
         process.nextTick(function(){
 
-            userModel.findOne({ 'google.id' : profile.id }, function(err, user) {
+            userModel.findOne({ 'id' : profile.id }, function(err, user) {
                 if (err)
                     return done(err);
 
@@ -51,10 +51,10 @@ passport.use(new googleStrategy({
                     var newUser          = new userModel();
 
                     // set all of the relevant information
-                    newUser.google.id    = profile.id;
-                    newUser.google.token = token;
-                    newUser.google.name  = profile.displayName;
-                    newUser.google.email = profile.emails[0].value; // pull the first email
+                    newUser.id    = profile.id;
+                    newUser.token = token;
+                    newUser.userName  = profile.displayName;
+                    //newUser.google.email = profile.emails[0].value; // pull the first email
 
                     // save the user
                     newUser.save(function(err) {
@@ -90,7 +90,7 @@ passport.use(new googleStrategy({
         process.nextTick(function() {
 
             // find the user in the database based on their facebook id
-            userModel.findOne({ 'facebook.id' : profile.id }, function(err, user) {
+            userModel.findOne({ 'id' : profile.id }, function(err, user) {
            
                 // if there is an error, stop everything and return that
                 // ie an error connecting to the database
@@ -105,9 +105,9 @@ passport.use(new googleStrategy({
                     var newUser   = new userModel();
 
                     // set all of the facebook information in our user model
-                    newUser.facebook.id    = profile.id; // set the users facebook id                   
-                    newUser.facebook.token = token; // we will save the token that facebook provides to the user                    
-                    newUser.facebook.name  = profile._json.name //look at the passport user profile to see how names are returned
+                    newUser.id    = profile.id; // set the users facebook id                   
+                    newUser.token = token; // we will save the token that facebook provides to the user                    
+                    newUser.userName  = profile._json.name //look at the passport user profile to see how names are returned
                    // newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
 
                     // save our user to the database

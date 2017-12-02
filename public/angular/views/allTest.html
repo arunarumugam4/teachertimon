@@ -1,0 +1,38 @@
+<!-- ALL USER TEST VIEW -->
+<div style="margin-top:20px;" class="container">
+    <div class="row">
+        <div class="col s12">
+            <div ng-show="allTestCtrl.initialLoader === true" style="top:14px;left:45%;margin:8px;" class="preloader-wrapper small active center">
+                <div class="spinner-layer ">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <a href="#!newtest">
+                <button style="margin:7px;color:black;background-color:white;border:2px solid #0f1626" class="btn  waves-effect waves-dark btn-small ">ADD NEW TEST</button>
+            </a>
+        </div>
+        <div class="col s12">
+            <div ng-repeat="test in allTestCtrl.allUserTests" class="card-panel hoverable  darken-5">
+                <h6 style="font-weight:600;text-align:left;">click start button to start this test </h6>
+                <button style="margin:7px;color:black;background-color:white;border:2px solid #0f1626" ng-click="allTestCtrl.startTest($index)" class="btn  waves-effect waves-dark btn-small ">START</button>
+                <h6 style="font-weight:600;text-align:right;"> Status : {{test.status}} </h6>
+                <h6 style="font-weight:600;text-align:right;"> Start Date : {{test.startDate | date}} </h6>
+                <h6 style="font-weight:600;text-align:right;"> Start Time : {{test.startTime}} </h6>
+                <h5 style="font-weight:600;text-align:center;font-size:1.3em;">{{test.title}}</h5>
+                <button style="background-color:#0f1626;margin:7px" ng-click="allTestCtrl.goToEdit($index)" class="btn  waves-effect waves-light "> EDIT</button>
+                <button style="margin:7px" ng-click="allTestCtrl.deleteTest($index)" class="btn red waves-effect waves-light btn-small ">DELETE</button>
+            </div>
+        </div>
+    </div>
+<script>
+    $("#handburger").show();
+</script>
+</div>

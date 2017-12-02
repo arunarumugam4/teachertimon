@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const _Router = express.Router();
-const isLoggedIn = require('../../customMiddlewares/isLoggedIn')
+const isLoggedIn = require('../../customMiddlewares/isLoggedIn');
 
 
 
@@ -11,8 +11,9 @@ const isLoggedIn = require('../../customMiddlewares/isLoggedIn')
 module.exports = (app, responseFormat) => {
 
      _Router.get('/profile',isLoggedIn, (req, res) => {
-
-              res.json('entered to your profile')
+              
+              let response = responseFormat(false,'entered to your profile',200,req.decoded._id);
+              return res.json(response);
      })
 
 

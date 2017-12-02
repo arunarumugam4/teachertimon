@@ -17,20 +17,19 @@ module.exports = (app, responseFormat) => {
     app.get('/auth/google/callback',
         passport.authenticate('google', {
            
-            failureRedirect: '/api/home',
+            failureRedirect: '/#!/login',
             session:false
         }), function(req, res){
-        	 let data = { googleId : req.user.google.id};
+        	 let data = { _id : req.user._id};
         	 
         // user and password are ok, generate token
         const token = jwt.sign(data, app.get('tokenSecret'), { expiresIn: 60 * 60 * 24 }); // ** validity 24 hours only **
         // assign the token in cookies
-        res.cookie("googletoken", token);
-        res.cookie('fbtoken',"");
-        res.cookie('token',"");
+        res.cookie("token", token);
+        
 
         // Successful authentication, redirect profile.
-        res.redirect('/api/profile');
+        res.redirect('/#!/publictest');
         });
 
 

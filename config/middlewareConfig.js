@@ -21,7 +21,7 @@ module.exports = (app) => {
 	app.use(bodyParser.urlencoded({extended:true}));
 	app.use(bodyParser.json());
 	app.use(cookieParser());
-	//app.use(expressSession({ secret: sessionSecret, resave: true, saveUninitialized: false }));
+	app.use(expressSession({ secret: sessionSecret, resave: true, saveUninitialized: false }));
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(flash());
