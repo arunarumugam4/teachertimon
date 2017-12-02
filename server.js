@@ -64,7 +64,13 @@ fs.readdirSync(path.join(__dirname, './app/controllers')).forEach((fileName) => 
 
 
 
+// get socket 
+const io = require('socket.io').listen(_server);
 
+
+
+// initialize socket configuration
+require('./config/socketConfig')(io,app);
 
 
 // initialize fall back route

@@ -22,7 +22,7 @@
         <div class="col s12">
             <div ng-repeat="test in allTestCtrl.allUserTests" class="card-panel hoverable  darken-5">
                 <h6 style="font-weight:600;text-align:left;">click start button to start this test </h6>
-                <button style="margin:7px;color:black;background-color:white;border:2px solid #0f1626" ng-click="allTestCtrl.startTest($index)" class="btn  waves-effect waves-dark btn-small ">START</button>
+                <button ng-click="allTestCtrl.golive($index)" style="margin:7px;color:black;background-color:white;border:2px solid #0f1626" ng-click="allTestCtrl.startTest($index)" class="btn  waves-effect waves-dark btn-small ">START</button>
                 <h6 style="font-weight:600;text-align:right;"> Status : {{test.status}} </h6>
                 <h6 style="font-weight:600;text-align:right;"> Start Date : {{test.startDate | date}} </h6>
                 <h6 style="font-weight:600;text-align:right;"> Start Time : {{test.startTime}} </h6>

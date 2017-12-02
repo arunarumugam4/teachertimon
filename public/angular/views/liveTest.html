@@ -1,1 +1,72 @@
-{{liveTestCtrl.name}}
+<div style="margin-top:20px;" class="container">
+    <div ng-show="liveTestCtrl.user===true" class="row">
+        <div class="col s12">
+            <h6 style="font-family: 'Roboto', sans-serif;font-weight:600;font-size:1.2em;text-align:center;">{{liveTestCtrl.testTitle}} </h6>
+        </div>
+        <div class="col s12">
+            <div class="card-panel row" ng-repeat=" question in liveTestCtrl.allQuestions track by $index">
+                <h6 style="font-weight:600;display:;text-align:right;">mark : {{question.mark}}</h6>
+                <h6 style="font-weight:600">{{$index + 1}} . {{question.question}}</h6>
+                <div ng-repeat="option in question.options track by $index">
+                    <div class="col s6">
+                        <input ng-model="question.value" value="{{$index+1}}" class="with-gap " name="{{$parent.$index}}" type="radio" id="{{question._id+$index+$parent.$index}}" />
+                        <label for="{{question._id+$index+$parent.$index}}">{{option}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <button ng-click="liveTestCtrl.calculateMark()" class="btn ">submitt</button> -->
+    </div>
+    <!-- ADMIT PANNEL -->
+    <div ng-show="liveTestCtrl.admin===true" class="row">
+        <div class="col s12">
+            <div class="card-panel">
+                <h6 style="font-family: 'Roboto', sans-serif;font-weight:600;font-size:1.2em;text-align:center;">ADMIN PANEL</h6>
+            </div>
+        </div>
+        <div class="col s12">
+            <a href="#!alltest">
+                <button class="btn">BACK</button>
+            </a>
+            <div class="card-panel red">
+                <h6 style="font-family: 'Roboto', sans-serif;font-weight:600;font-size:1.1em;text-align:center;">{{liveTestCtrl.adminMessage}}</h6>
+                <div>
+                    <h6 style="font-family: 'Roboto', sans-serif;font-weight:500;font-size:1.5em;text-align:center;color:white">{{liveTestCtrl.usersOnline}}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col s12">
+            <div>
+                <button ng-show="liveTestCtrl.endbtn === true;" ng-click="liveTestCtrl.stopTest()" class="btn">end test</button>
+            </div>
+        </div>
+    </div>
+    <!-- TEST NOT LIVE WINDOW -->
+    <div ng-show="liveTestCtrl.notlive === true" class="row">
+        <div class="col s12 card-panel">
+            <h6 style="font-family: 'Roboto', sans-serif;font-weight:600;font-size:1.1em;text-align:center;">
+     			THIS TEST NOT YET STARTED 
+     		</h6>
+        </div>
+    </div>
+    <div ng-show="liveTestCtrl.summary === true" class="row">
+        <a href="#!publictest">
+            <button class="btn">BACK</button>
+        </a>
+        <div class="col s12">
+            <div class="card-panel blue">
+                <h6 style="font-family: 'Roboto', sans-serif;font-weight:600;font-size:1.1em;text-align:center;">
+     			Your Score : {{liveTestCtrl.totalMarks}}
+
+     		</h6>
+                <h6 style="font-family: 'Roboto', sans-serif;font-weight:600;font-size:1.1em;text-align:center;">
+     			Maximum Score : {{liveTestCtrl.availableMark}}
+     			
+     		</h6>
+            </div>
+        </div>
+    </div>
+    <script>
+    $("#handburger").show();
+    </script>
+</div>

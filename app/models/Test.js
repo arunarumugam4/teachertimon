@@ -8,7 +8,6 @@ let testSchema = Schema({
     admin : {type:Schema.ObjectId, ref:"userModel"},
     createdAt : {type:Date, default:Date.now},
     questions : [{type:Schema.ObjectId, ref:"questionModel"}],
-    registeredUsers :[{type:Schema.ObjectId, ref:"userModel"}],
     attendedUsers:[{type:Schema.ObjectId, ref:"userModel"}],
     duration: {type:Date},
     startedAt:{type:Date},

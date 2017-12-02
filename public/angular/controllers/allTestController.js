@@ -73,7 +73,18 @@ app.controller('allTestController', ['$http','$cookies','$location','$localStora
      
      
   }
+ 
 
+  // go live handler
+  self.golive = function(index){
+
+     let testId =  self.allUserTests[index]._id;
+
+     // storeit in local storage and redirect to live test page
+     $localStorage.testId = testId;
+     $localStorage.start = true;
+     $location.path('/livetest');
+  }
 
 
 }])

@@ -8,6 +8,7 @@ let questionSchema = Schema({
 	options :[{type:String}],
 	answer : {type:Number},
 	mark : {type:Number},
+	value:{type:String,default:""},
 	createdBy:{type:Schema.ObjectId, ref:'userModel'}
 })
 

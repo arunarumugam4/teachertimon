@@ -1,5 +1,5 @@
 // all publically available tests controller
-app.controller('publicTestController',['$http','$location','$cookies',function($http,$location,$cookies,){
+app.controller('publicTestController',['$http','$location','$cookies','$localStorage',function($http,$location,$cookies,$localStorage){
 	let self = this;
 	self.name = "public test";
 	self.initialLoader =true;
@@ -33,5 +33,15 @@ app.controller('publicTestController',['$http','$location','$cookies',function($
 	 })
 	 .catch(err => {
 	 	console.log(err);
-	 })
+	 });
+
+
+	 // join test handler
+	 self.jointest = function(index){
+	 	let testId = self.allPublicTests[index]._id
+        
+	 	$localStorage.testId = testId;
+	 	$localStorage.start = false;
+	 	$location.path('livetest');
+	 }
 }])
